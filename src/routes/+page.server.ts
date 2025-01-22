@@ -51,8 +51,6 @@ export const actions: Actions = {
 			console.log('responseData', responseData);
 			matchId = responseData.match_id;
 			console.log('matchId', matchId);
-
-			// Redirect to the match page
 		} catch (error) {
 			console.error('Error making the API request:', error);
 			return fail(500, {
