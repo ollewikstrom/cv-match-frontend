@@ -20,16 +20,21 @@ export const actions: Actions = {
 			});
 		}
 
-		let matchId;
+		// let matchId;
 
 		// Extract data from the form
-		const { jobListing, cvFile } = form.data;
+		const { jobListing, cvFiles } = form.data;
+
+		console.log(cvFiles.length);
 
 		try {
 			// Create a FormData object to hold the request data
 			const formData = new FormData();
 			formData.append('job_listing', jobListing);
-			formData.append('cv_file', cvFile);
+			// Append the CV files to the FormData object
+			cvFiles.forEach((file) => {
+				formData.append('cv_files', file);
+			});
 
 			// Make the POST request to the backend
 			const res = await event.fetch(`${API_URL}/process`, {
@@ -49,8 +54,8 @@ export const actions: Actions = {
 			// Process the response
 			const responseData = await res.json();
 			console.log('responseData', responseData);
-			matchId = responseData.match_id;
-			console.log('matchId', matchId);
+			// matchId = responseData.match_id;
+			// console.log('matchId', matchId);
 		} catch (error) {
 			console.error('Error making the API request:', error);
 			return fail(500, {
@@ -61,6 +66,6 @@ export const actions: Actions = {
 				error: 'An unexpected error occurred. Please try again later.'
 			});
 		}
-		throw redirect(308, '/match/' + matchId);
+		return message(form, 'all good');
 	}
 };

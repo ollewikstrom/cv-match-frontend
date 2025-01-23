@@ -1,5 +1,7 @@
 <script lang="ts">
-	let matchData = $props();
+	let { data } = $props();
+
+	let { matchData } = data;
 
 	console.log(matchData);
 </script>
@@ -8,7 +10,7 @@
 {#await matchData}
 	<p>Loading...</p>
 {:then matchData}
-	<pre>{JSON.stringify(matchData, null, 2)}</pre>
+	<p>{matchData.match_id}</p>
 {:catch error}
 	<p>{error.message}</p>
 {/await}
