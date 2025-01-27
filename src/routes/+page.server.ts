@@ -66,6 +66,6 @@ export const actions: Actions = {
 				error: 'An unexpected error occurred. Please try again later.'
 			});
 		}
-		return message(form, 'all good');
+		return message(form, 'Your CV has been successfully processed.');
 	}
 };
