@@ -50,7 +50,6 @@
 
 	function handleFileInput(e: Event) {
 		isDragging = false; // Reset drag state
-		console.log('input', e.currentTarget.files);
 		if (!(e.currentTarget instanceof HTMLInputElement)) return;
 		$formData.cvFiles = Array.from(e.currentTarget.files ?? []);
 		const newFiles = Array.from((e.target as HTMLInputElement).files ?? []);
@@ -83,7 +82,7 @@
 	method="POST"
 	enctype="multipart/form-data"
 	action="?/process"
-	class=" flex w-96 flex-col gap-4"
+	class=" min-w-xl flex flex-col gap-4"
 	use:enhance
 >
 	<Form.Field {form} name="jobListing">
@@ -100,7 +99,7 @@
 				<Form.Label>CV Files</Form.Label>
 				<ol class="flex list-none flex-col gap-2 px-2">
 					{#each files as item}
-						<li class="flex items-center justify-between gap-2">
+						<li class="flex max-w-lg items-center justify-between gap-2">
 							<p class="rounded-md border border-black px-3 py-2">{item.name}</p>
 							<Button onclick={() => removeFileFromList(item)} class="bg-red-600 hover:bg-red-400"
 								>Remove</Button
