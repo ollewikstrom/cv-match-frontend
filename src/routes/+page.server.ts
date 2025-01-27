@@ -29,7 +29,7 @@ export const actions: Actions = {
 			// Create a FormData object to hold the request data
 			const formData = new FormData();
 			formData.append('job_listing', jobListing);
-			formData.append('cv_file', cvFile);
+			formData.append('cv_files', cvFile);
 
 			// Make the POST request to the backend
 			const res = await event.fetch(`${API_URL}/process`, {
@@ -61,6 +61,6 @@ export const actions: Actions = {
 				error: 'An unexpected error occurred. Please try again later.'
 			});
 		}
-		throw redirect(308, '/match/' + matchId);
+		return message(form, 'Your CV has been successfully processed.');
 	}
 };
