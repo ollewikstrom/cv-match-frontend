@@ -56,9 +56,14 @@ const config: Config = {
 			},
 			fontFamily: {
 				sans: [...fontFamily.sans]
+			},
+			fontSize: {
+				h1: "2rem",
+				h2: "1.5rem",
 			}
 		}
 	},
+
 };
 
 export default config;

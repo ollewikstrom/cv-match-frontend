@@ -5,6 +5,3 @@
 </script>
 
 <SettingsForm data={data.form} />
-<form action="?/bobo" method="POST">
-	<button>Click</button>
-</form>
