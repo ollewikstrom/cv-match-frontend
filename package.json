@@ -22,6 +22,7 @@
 		"autoprefixer": "^10.4.20",
 		"bits-ui": "1.0.0-next.78",
 		"clsx": "^2.1.1",
+		"daisyui": "^4.12.23",
 		"formsnap": "1.0.1",
 		"prettier": "^3.4.2",
 		"prettier-plugin-svelte": "^3.3.3",

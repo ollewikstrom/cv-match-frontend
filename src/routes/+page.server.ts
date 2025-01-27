@@ -20,7 +20,7 @@ export const actions: Actions = {
 			});
 		}
 
-		// let matchId;
+		let groupId;
 
 		// Extract data from the form
 		const { jobListing, cvFiles } = form.data;
@@ -54,6 +54,7 @@ export const actions: Actions = {
 			// Process the response
 			const responseData = await res.json();
 			console.log('responseData', responseData);
+			groupId = responseData.match_group_id;
 			// matchId = responseData.match_id;
 			// console.log('matchId', matchId);
 		} catch (error) {
@@ -66,6 +67,7 @@ export const actions: Actions = {
 				error: 'An unexpected error occurred. Please try again later.'
 			});
 		}
-		return message(form, 'Your CV has been successfully processed.');
+		return redirect(308, `/match/${groupId}`);
+		// return message(form, 'Your CV has been successfully processed.');
 	}
 };

@@ -7,7 +7,6 @@
 
 <div class="match-result">
 	<ul>
-		
 		{#each items as item}
 			<li class={activeTabValue === item.value ? 'active' : ''}>
 				<span on:click={handleClick(item.value)}>{item.label}</span>
@@ -25,22 +24,18 @@
 				<div class="skills-container">
 					<div class="must-have">
 						<h1>Must Have</h1>
-						{#each item.component.skills as skill }
-						{#if skill.level_of_importance == "MUST HAVE" && skill.match_label == "MATCH"}
-						<li id = "matches-list">
-						  <p class = "skill-name">{skill.skill_name} </p> <br />
-						  <p class ="skill-description">{ skill.reason }</p>
-						</li>
-						{/if}
+						{#each item.component.skills as skill}
+							{#if skill.level_of_importance == 'MUST HAVE' && skill.match_label == 'MATCH'}
+								<li id="matches-list">
+									<p class="skill-name">{skill.skill_name}</p>
+									<br />
+									<p class="skill-description">{skill.reason}</p>
+								</li>
+							{/if}
 						{/each}
-
 					</div>
-					<div class="nice-to-have">
-
-					</div>
-
+					<div class="nice-to-have"></div>
 				</div>
-				
 			</div>
 		{/if}
 	{/each}
@@ -48,10 +43,11 @@
 
 <style>
 	.match-result {
+		height: 100%;
 		position: relative;
 		width: 90vw;
 		padding-top: 200px;
-		padding-bottom: 80px;		
+		padding-bottom: 80px;
 		left: 10px;
 	}
 
@@ -108,7 +104,6 @@
 		gap: 1rem; /* Adjust the gap as needed */
 	}
 	.skills-container .must-have,
-	
 	.skills-container .nice-to-have {
 		flex: 1;
 		padding: 1rem;
@@ -122,7 +117,6 @@
 		text-transform: capitalize;
 	}
 	.summary h2,
-
 	.skills h2 {
 		margin-bottom: 10px;
 		color: #495057;
