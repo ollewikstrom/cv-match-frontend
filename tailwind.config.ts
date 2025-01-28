@@ -61,6 +61,14 @@ const config: Config = {
 				hd1: '1.5rem !important',
 				h2: '1.5rem',
 				pg: '1.125rem'
+			},
+			sogetiColors: {
+				lblue: '#90cbf7',
+				dblue: '#004080',
+				red: '#d91e18',
+				gray: '#7f7f7f',
+				white: '#ffffff',
+				black: '#000000'
 			}
 		}
 	}

@@ -8,6 +8,7 @@
 	const matchType = new Map([
 		['MATCH', `list-['✅']`],
 		['PARTIAL MATCH', `list-['☑️']`],
+		['UNSURE', '⚠️'],
 		['NO MATCH', `list-['❌']`]
 	]);
 </script>
