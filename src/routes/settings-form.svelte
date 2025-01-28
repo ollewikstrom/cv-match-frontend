@@ -75,73 +75,74 @@
 	}
 </script>
 
-<h1>Settings Form</h1>
-
+<h2 class="select-none p-8 text-4xl font-bold">CV Input</h2>
 <form
 	method="POST"
 	enctype="multipart/form-data"
 	action="?/process"
-	class=" min-w-xl flex flex-col gap-4"
+	class=" flex min-w-96 select-none flex-col gap-4"
 	use:enhance
 >
-	<Form.Field {form} name="jobListing">
-		<Form.Control let:attrs>
-			<Form.Label>Job Listing</Form.Label>
-			<Input {...attrs} bind:value={$formData.jobListing} />
-		</Form.Control>
-		<Form.Description>A Whoz link to the prospect you wish to compare the CV to</Form.Description>
-		<Form.FieldErrors />
-	</Form.Field>
-	<Form.Field {form} name="cvFiles">
-		<Form.Control let:attrs>
-			<div class="flex flex-col gap-2">
-				<Form.Label>CV Files</Form.Label>
-				<ol class="flex list-none flex-col gap-2 px-2">
-					{#each files as item}
-						<li class="flex max-w-lg items-center justify-between gap-2">
-							<p class="rounded-md border border-black px-3 py-2">{item.name}</p>
-							<Button onclick={() => removeFileFromList(item)} class="bg-red-600 hover:bg-red-400"
-								>Remove</Button
-							>
-						</li>
-					{/each}
-				</ol>
-				<div class="relative flex h-32 flex-col gap-2">
-					<label
-						for="cvFiles"
-						class={`absolute z-0 grid h-full w-full cursor-pointer place-items-center rounded-md border-2 border-dashed` +
-							(isDragging ? ' border-blue-500 text-slate-600' : '')}
-						>{isDragging ? 'Drop files here' : 'Drop files here or click to select'}
-					</label>
-					<input
-						ondragleave={handleDragLeave}
-						ondragover={handleDragOver}
-						{...attrs}
-						type="file"
-						class="pointer-events-auto absolute left-0 top-0 z-50 h-full w-full cursor-pointer opacity-0"
-						id="cvFiles"
-						accept=".docx"
-						name="cvFiles"
-						multiple
-						oninput={handleFileInput}
-					/>
+	{#if $delayed || $submitting}
+		<span class="loading loading-dots loading-lg"></span>
+	{:else}
+		<Form.Field {form} name="jobListing">
+			<Form.Control let:attrs>
+				<Form.Label class="text-lg">Job Listing URL</Form.Label>
+				<Input
+					{...attrs}
+					bind:value={$formData.jobListing}
+					placeholder="Ex. https://app.whoz.com/open/shared/task/6dg7..."
+				/>
+			</Form.Control>
+			<Form.Description>Paste the Whoz URL here</Form.Description>
+			<Form.FieldErrors />
+		</Form.Field>
+		<Form.Field {form} name="cvFiles">
+			<Form.Control let:attrs>
+				<div class="flex flex-col gap-2">
+					<Form.Label class="text-lg">Upload CVs to match</Form.Label>
+					<ol class="flex list-none flex-col gap-2 px-2">
+						{#each files as item}
+							<li class="flex max-w-lg items-center justify-between gap-2">
+								<p class="rounded-md border border-black px-3 py-2">{item.name}</p>
+								<Button onclick={() => removeFileFromList(item)} class="bg-red-600 hover:bg-red-400"
+									>Remove</Button
+								>
+							</li>
+						{/each}
+					</ol>
+					<div class="relative flex h-32 flex-col gap-2">
+						<label
+							for="cvFiles"
+							class={`absolute z-0 grid h-full w-full cursor-pointer place-items-center rounded-md border-2 border-dashed` +
+								(isDragging ? ' border-blue-500 text-slate-600' : '')}
+							>{isDragging ? 'Drop files here' : 'Click to select or drag and drop files here'}
+						</label>
+						<input
+							ondragleave={handleDragLeave}
+							ondragover={handleDragOver}
+							{...attrs}
+							type="file"
+							class="pointer-events-auto absolute left-0 top-0 z-50 h-full w-full cursor-pointer opacity-0"
+							id="cvFiles"
+							accept=".docx"
+							name="cvFiles"
+							multiple
+							oninput={handleFileInput}
+						/>
+					</div>
 				</div>
-			</div>
-		</Form.Control>
-		<Form.Description>A 'docx' file of the CV(:s) you wish to submit</Form.Description>
-		<Form.FieldErrors />
-	</Form.Field>
-	<Form.Button>Submit</Form.Button>
-	{#if $delayed}
-		<p>Submitting...</p>
-	{/if}
-	{#if $timeout}
-		<p>Timeout...</p>
-	{/if}
-	{#if $message}
-		<p>{$message}</p>
-	{/if}
-	{#if $submitting}
-		<p>Submitting...</p>
+			</Form.Control>
+			<Form.Description>Only '.docx' files allowed</Form.Description>
+			<Form.FieldErrors />
+		</Form.Field>
+		<Form.Button class="px-8 py-8 text-2xl">Match</Form.Button>
+		{#if $timeout}
+			<p class="text-red-600">Request timed out. Please try again</p>
+		{/if}
+		{#if $message}
+			<p class="text-red-600">{$message}</p>
+		{/if}
 	{/if}
 </form>

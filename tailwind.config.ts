@@ -1,9 +1,11 @@
 import { fontFamily } from 'tailwindcss/defaultTheme';
+import daisyui from 'daisyui';
 import type { Config } from 'tailwindcss';
 
 const config: Config = {
 	darkMode: ['class'],
 	content: ['./src/**/*.{html,js,svelte,ts}'],
+	plugins: [daisyui],
 	safelist: ['dark'],
 	theme: {
 		container: {
@@ -55,14 +57,15 @@ const config: Config = {
 				sm: 'calc(var(--radius) - 4px)'
 			},
 			fontFamily: {
-				sans: [...fontFamily.sans]
+				sans: [...fontFamily.sans],
+				serif: ['DM Serif Text', ...fontFamily.serif]
 			},
 			fontSize: {
 				hd1: '1.5rem !important',
 				h2: '1.5rem',
 				pg: '1.125rem'
 			},
-			sogetiColors: {
+			borderColor: {
 				lblue: '#90cbf7',
 				dblue: '#004080',
 				red: '#d91e18',

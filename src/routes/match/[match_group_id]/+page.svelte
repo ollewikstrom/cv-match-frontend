@@ -1,5 +1,6 @@
 <script lang="ts">
 	import * as Tabs from '$lib/components/ui/tabs';
+	import { match } from 'effect/ChildExecutorDecision';
 	let { data } = $props();
 	let { matchData } = data;
 	let { match_group_id, job_listing_url, matches, job_listing_name } = matchData;
@@ -22,14 +23,14 @@
 			>View Job Listing</a
 		>
 	</div>
-	<Tabs.Root value={matches[0].match_id} class="p-8">
-		<Tabs.List class="flex flex-wrap">
+	<Tabs.Root value={matches[0].match_id} class=" p-8 ">
+		<Tabs.List class="flex h-fit flex-wrap gap-2 bg-blue-100 text-slate-600">
 			{#each matches as match}
-				<Tabs.Trigger value={match.match_id}>{match.match_id}</Tabs.Trigger>
+				<Tabs.Trigger value={match.match_id} class=" bg-slate-300">{match.match_id}</Tabs.Trigger>
 			{/each}
 		</Tabs.List>
 		{#each matches as match}
-			<Tabs.Content value={match.match_id} class="solid #90cbf7 border-2 p-4">
+			<Tabs.Content value={match.match_id} class="solid  rounded-lg border-2 border-blue-100 p-12">
 				<div>
 					<h1 class="text-3xl">Summary</h1>
 					<h2>{match.cv_name}</h2>
@@ -37,8 +38,8 @@
 				</div>
 
 				<h1 class=" py-2 text-3xl">Skills</h1>
-				<div class="space-between border-1px flex gap-4">
-					<div class="border-1px flex flex-1 flex-col border-2 p-4">
+				<div class="space-between border-1px border-lblue flex gap-4">
+					<div class="border-1px flex flex-1 flex-col rounded-lg border-2 border-blue-100 p-4">
 						<h1 class="text-2xl">Required</h1>
 						{#each match.skills as skill}
 							{#if skill.level_of_importance == 'MUST HAVE'}
@@ -50,7 +51,7 @@
 						{/each}
 					</div>
 
-					<div class="border-1px flex flex-1 flex-col border-2 p-4">
+					<div class="border-1px flex flex-1 flex-col rounded-lg border-2 border-blue-100 p-4">
 						<h1 class="text-2xl">Optional</h1>
 						{#each match.skills as skill}
 							{#if skill.level_of_importance != 'MUST HAVE'}
@@ -68,4 +69,3 @@
 {:catch error}
 	<p>{error.message}</p>
 {/await}
-```
