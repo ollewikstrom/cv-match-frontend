@@ -1,24 +1,26 @@
 <script lang="ts">
 	/** @type {{ value: number, label: string, component: any }[]} */
 	export let items: { value: number; label: string; component: any }[] = [];
-	export let activeTabValue = 1;
+	export let activeTabValue = 0;
 	const handleClick = (tabValue: number) => () => (activeTabValue = tabValue);
+
 </script>
 
-<div class="match-result">
+<div class="match-result p-8">
 	<ul>
-		
 		{#each items as item}
 			<li class={activeTabValue === item.value ? 'active' : ''}>
 				<span on:click={handleClick(item.value)}>{item.label}</span>
 			</li>
 		{/each}
 	</ul>
+	
 	{#each items as item}
+
 		{#if activeTabValue == item.value}
-			<div class="box">
+			<div class="box  top-0">
 				<div class="summary">
-					<h1>Summary</h1>
+					<h1 class="hd1">Summary</h1>
 					<h2>{item.component.cv_name}</h2>
 					{item.component.summary}
 				</div>
@@ -27,15 +29,85 @@
 						<h1>Must Have</h1>
 						{#each item.component.skills as skill }
 						{#if skill.level_of_importance == "MUST HAVE" && skill.match_label == "MATCH"}
-						<li id = "matches-list">
-						  <p class = "skill-name">{skill.skill_name} </p> <br />
+						<li id = "matches-list" >
+						  <text class = "capitalize">{skill.skill_name} </text><br />
+						  <p class ="skill-description">{ skill.reason }</p>
+						</li>
+						{/if}
+						{/each}
+						{#each item.component.skills as skill }
+						{#if skill.level_of_importance == "MUST HAVE" && skill.match_label == "PARTIAL MATCH"}
+						<li id = "partial-list">
+							<text class = "capitalize">{skill.skill_name} </text><br />
 						  <p class ="skill-description">{ skill.reason }</p>
 						</li>
 						{/if}
 						{/each}
 
+						{#each item.component.skills as skill }
+						{#if skill.level_of_importance == "MUST HAVE" && skill.match_label == "NO MATCH"}
+						<li id = "missing-list">
+							<text class = "capitalize">{skill.skill_name} </text><br />
+						  <p class ="skill-description">{ skill.reason }</p>
+						</li>
+						{/if}
+						{/each}
 					</div>
 					<div class="nice-to-have">
+						<h1 class="hd1">Nice to Have</h1>
+						{#each item.component.skills as skill }
+						{#if skill.level_of_importance == "SHOULD HAVE" && skill.match_label == "MATCH"}
+						<li id = "matches-list">
+							<text class = "capitalize">{skill.skill_name} </text> <br />
+						  <p class ="skill-description">{ skill.reason }</p>
+						</li>
+						{/if}
+						{/each}
+
+						{#each item.component.skills as skill }
+						{#if skill.level_of_importance == "NICE TO HAVE" && skill.match_label == "MATCH"}
+						<li id = "matches-list">
+							<text class = "capitalize">{skill.skill_name} </text> <br />
+						  <p class ="skill-description">{ skill.reason }</p>
+						</li>
+						{/if}
+						{/each}
+
+						{#each item.component.skills as skill }
+						{#if skill.level_of_importance == "SHOULD HAVE" && skill.match_label == "PARTIAL MATCH"}
+						<li id = "partial-list">
+							<text class = "capitalize">{skill.skill_name} </text> <br />
+						  <p class ="skill-description">{ skill.reason }</p>
+						</li>
+						{/if}
+						{/each}
+
+						{#each item.component.skills as skill }
+						{#if skill.level_of_importance == "NICE TO HAVE" && skill.match_label == "PARTIAL MATCH"}
+						<li id = "partial-list" class = "capitalize">
+							<text class = "capitalize">{skill.skill_name} </text> <br />
+						  <p class ="skill-description">{ skill.reason }</p>
+						</li>
+						{/if}
+						{/each}
+						
+						{#each item.component.skills as skill }
+						{#if skill.level_of_importance == "SHOULD HAVE" && skill.match_label == "NO MATCH"}
+						<li id = "missing-list">
+							<text class = "capitalize">{skill.skill_name} </text><br />
+						  <p class ="skill-description">{ skill.reason }</p>
+						</li>
+						{/if}
+						{/each}
+
+						{#each item.component.skills as skill }
+						{#if skill.level_of_importance == "NICE TO HAVE" && skill.match_label == "NO MATCH"}
+						<li id = "missing-list">
+							<text class = "capitalize">{skill.skill_name} </text><br />
+						  <p class ="skill-description">{ skill.reason }</p>
+						</li>
+						{/if}
+						{/each}
 
 					</div>
 
@@ -46,14 +118,10 @@
 	{/each}
 </div>
 
+
 <style>
-	.match-result {
-		position: relative;
-		width: 90vw;
-		padding-top: 200px;
-		padding-bottom: 80px;		
-		left: 10px;
-	}
+
+
 
 	.match-result h1 {
 		font-size: large;
@@ -61,7 +129,7 @@
 	.box {
 		padding: 40px;
 		border: 1px solid #dee2e6;
-		border-radius: 0 0.5rem 0.5rem 0.5rem;
+		border-radius: 0 0 0.5rem 0.5rem;
 	}
 
 	ul {
@@ -78,7 +146,8 @@
 	}
 
 	span {
-		border: 1px solid transparent;
+		
+		border: 1px solid #dee2e6;
 		border-top-left-radius: 0.25rem;
 		border-top-right-radius: 0.25rem;
 		display: block;

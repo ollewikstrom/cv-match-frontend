@@ -4,4 +4,6 @@
 	export let data: PageData;
 </script>
 
-<SettingsForm data={data.form} />
+<div class="h-screen w-screen flex flex-col items-center justify-center">
+	<SettingsForm data={data.form} />
+</div>
