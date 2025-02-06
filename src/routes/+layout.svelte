@@ -5,6 +5,6 @@
 </script>
 
 <Navbar />
-<main class="flex min-h-screen flex-col pt-32">
+<main class="flex flex-col pt-36 h-[calc(100vh-9rem)] items-center justify-center">
 	{@render children()}
 </main>

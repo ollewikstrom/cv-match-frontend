@@ -1,8 +1,8 @@
 export const prerender = false;
 
 import type { PageServerLoad, Actions } from './$types.js';
-import { fail, redirect } from '@sveltejs/kit';
-import { actionResult, message, superValidate } from 'sveltekit-superforms';
+import { error, fail, redirect } from '@sveltejs/kit';
+import { actionResult, message, setError, superValidate } from 'sveltekit-superforms';
 import { formSchema } from './schema';
 import { zod } from 'sveltekit-superforms/adapters';
 import { API_URL } from '$env/static/private';
@@ -29,7 +29,7 @@ export const actions: Actions = {
 
 		console.log('Number of CV files: ' + cvFiles.length);
 		console.log('Job Listing: ' + jobListing);
-		console.log('Calling the API: ' + `${API_URL}/process`);
+		console.log('Calling the API: ' + `${API_URL}/processff`);
 
 		try {
 			// Create a FormData object to hold the request data
@@ -41,7 +41,7 @@ export const actions: Actions = {
 			});
 
 			// Make the POST request to the backend
-			const res = await event.fetch(`${API_URL}/process`, {
+			const res = await event.fetch(`${API_URL}/processff`, {
 				method: 'POST',
 				body: formData
 			});
@@ -51,10 +51,8 @@ export const actions: Actions = {
 			// Check the response status
 			if (!res.ok) {
 				const errorData = await res.json();
-				return fail(res.status, {
-					form,
-					error: errorData.detail || 'An error occurred while processing your request.'
-				});
+				console.log('errorData', errorData);
+				throw new Error("Database connection error")
 			}
 
 			// Process the response
