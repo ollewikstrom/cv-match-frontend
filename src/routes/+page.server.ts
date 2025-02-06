@@ -1,3 +1,5 @@
+export const prerender = false;
+
 import type { PageServerLoad, Actions } from './$types.js';
 import { fail, redirect } from '@sveltejs/kit';
 import { actionResult, message, superValidate } from 'sveltekit-superforms';
@@ -25,7 +27,9 @@ export const actions: Actions = {
 		// Extract data from the form
 		const { jobListing, cvFiles } = form.data;
 
-		console.log(cvFiles.length);
+		console.log('Number of CV files: ' + cvFiles.length);
+		console.log('Job Listing: ' + jobListing);
+		console.log('Calling the API: ' + `${API_URL}/process`);
 
 		try {
 			// Create a FormData object to hold the request data
@@ -41,6 +45,8 @@ export const actions: Actions = {
 				method: 'POST',
 				body: formData
 			});
+
+			console.log('res', res);
 
 			// Check the response status
 			if (!res.ok) {
