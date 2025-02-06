@@ -30,6 +30,7 @@
 		"svelte": "^5.19.2",
 		"svelte-adapter-azure-swa": "^0.20.1",
 		"svelte-check": "^4.1.4",
+		"svelte-copy-url-button": "^1.0.6",
 		"sveltekit-superforms": "^2.23.1",
 		"tailwind-merge": "^2.6.0",
 		"tailwind-variants": "^0.3.1",
