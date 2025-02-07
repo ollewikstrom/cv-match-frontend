@@ -29,7 +29,7 @@ export const actions: Actions = {
 
 		console.log('Number of CV files: ' + cvFiles.length);
 		console.log('Job Listing: ' + jobListing);
-		console.log('Calling the API: ' + `${API_URL}/processff`);
+		console.log('Calling the API: ' + `${API_URL}/process`);
 
 		try {
 			// Create a FormData object to hold the request data
@@ -41,7 +41,7 @@ export const actions: Actions = {
 			});
 
 			// Make the POST request to the backend
-			const res = await event.fetch(`${API_URL}/processff`, {
+			const res = await event.fetch(`${API_URL}/process`, {
 				method: 'POST',
 				body: formData
 			});
